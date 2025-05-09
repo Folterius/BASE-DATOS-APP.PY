@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Eventos Colombianos</title>
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-item">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            <p>Inicio</p>
+        </div>
+        <div class="separator"></div>
+        <div class="nav-item">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+            <p>Eventos</p>
+        </div>
+        <div class="separator"></div>
+        <div class="nav-item">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 8V7a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1"/><path d="M3 13h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <p>Contacto</p>
+        </div>
+    </header>
+
+    <main class="main-content" id="card-container">
+        <!-- Las tarjetas se insertarán dinámicamente desde JS -->
+    </main>
+
+    <script>
+        // Simulación de datos como si vinieran del backend
+        async function fetchEventos() {
+            return [
+                {
+                    imagen: "feria-de-cali.jpg",
+                    titulo: "Feria de Cali",
+                    descripcion: "¡La Feria de Cali es la mejor! Siempre tengo una gran cantidad de diversión y me encanta la comida. Es una experiencia que no te puedes perder."
+                },
+                {
+                    imagen: "carnavales.jpg",
+                    titulo: "Carnavales",
+                    descripcion: "¡A divertirse en los carnavales colombianos! Esta época del año es siempre una de mis favoritas."
+                },
+                {
+                    imagen: "fiestas-y-flores.jpg",
+                    titulo: "Fiestas y flores",
+                    descripcion: "¡Vamos a la feria de las flores! Estoy super emocionada por ver todas las flores hermosas."
+                }
+            ];
+        }
+
+        async function renderEventos() {
+            const eventos = await fetchEventos();
+            const container = document.getElementById('card-container');
+            eventos.forEach(evento => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${evento.imagen}" alt="${evento.titulo}">
+                    <h2>${evento.titulo}</h2>
+                    <p>${evento.descripcion}</p>
+                    <button>Ver más</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        renderEventos();
+    </script>
+</body>
+</html>
